@@ -18,11 +18,11 @@ def save_upload_file(upload_file):
 
 def run_background_remover(input_img_file):
     input_img_path = save_upload_file(input_img_file)
-    ouput_img_path = input_img_path.replace('.', '_rmbg.').replace('jpg','png').replace('jpeg', 'png')
+    output_img_path = input_img_path.replace('.', '_rmbg.').replace('jpg','png').replace('jpeg', 'png')
     try:
         image = Image.open(input_img_file)
         output = remove(image)
-        output.save(ouput_img_path, "PNG")
+        output.save(output_img_path, "PNG")
 
         col1, col2 = st.columns(2)
     
@@ -40,13 +40,13 @@ def run_background_remover(input_img_file):
 
         with col2:
             st.header("Despues")
-            st.image(ouput_img_path, caption="Imagen confondo removido")
+            st.image(output_img_path, caption="Imagen confondo removido")
 
-            with open(input_img_path, "rb") as img_file:
+            with open(output_img_path, "rb") as img_file:
                 st.download_button(
                     label="Descargar Imagen Procesada",
                     data=img_file,
-                    file_name=os.path.basename(ouput_img_path),
+                    file_name=os.path.basename(output_img_path),
                     mime="image/png"
                 )
         st.success("Fondo removido exitosamente!")
